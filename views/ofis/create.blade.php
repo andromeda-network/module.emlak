@@ -145,7 +145,7 @@ Yeni Emlak Ofisi Oluştur | Emlak Ofisi Yönetimi | YönetimPaneli
         data: {userId:$(this).val()},
         dataType: 'json',
         success: function(msg){
-          $('#gorev-yetkileri').append('<tr><td>'+msg.username+'</td><td>'+msg.email+'</td><td><select name="yetkili_level[]"><option value="1">Yonetici</option><option value="2" selected="selected">Ofis Calisani</option></select>&nbsp;&nbsp;<a class="kaldir btn btn-primary btn-xs" href="#">Kaldir</a><input type="hidden" name="yetkili_id[]" value="'+msg.id+'"></td></tr>');
+          $('#gorev-yetkileri').append('<tr><td>'+msg.username+'</td><td>'+msg.email+'</td><td><select name="yetkili_level[]"><?php foreach($userGroups as $userGroup): echo "<option value=\"{$userGroup->id}\">{$userGroup->name}</option>"; endforeach; ?></select>&nbsp;&nbsp;<a class="kaldir btn btn-primary btn-xs" href="#">Kaldir</a><input type="hidden" name="yetkili_id[]" value="'+msg.id+'"></td></tr>');
         }
       });
 

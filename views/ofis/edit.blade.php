@@ -60,7 +60,23 @@ Emlak Ofisi Duzenle: {{$ofis->ofis_adi}} | Emlak Ofisi Yönetimi | YönetimPanel
                 <tbody id="gorev-yetkileri">
                   @foreach($yetkililer as $yetkili)
                     <?php $uye = $this->auth_model->get_by_id($yetkili->user_id); ?>
-                    <?php echo '<tr><td>'.$uye->username.'</td><td>'.$uye->email.'</td><td><select name="yetkili_level[]"><option value="1">Yonetici</option><option value="2" '.(($yetkili->type == 2) ? 'selected="selected"' : null) .'  >Ofis Calisani</option></select>&nbsp;&nbsp;<a class="kaldir btn btn-primary btn-xs" href="#">Kaldir</a><input type="hidden" name="yetkili_id[]" value="'.$uye->id.'"></td></tr>'; ?>
+                    <tr>
+                      <td>{{$uye->username}}</td>
+                      <td>{{$uye->email}}</td>
+                      <td>
+                        <select name="yetkili_level[]">
+                          <?php foreach($userGroups as $userGroup): ?>
+                            <option value="{{$userGroup->id}}" <?php echo (($yetkili->type == $userGroup->id) ? 'selected="selected"' : null); ?>>{{$userGroup->name}}</option>
+                          <?php endforeach; ?>
+                        </select>&nbsp;&nbsp;
+                        <a class="kaldir btn btn-primary btn-xs" href="#">Kaldir</a>
+                        <input type="hidden" name="yetkili_id[]" value="{{$uye->id}}">
+                      </td>
+
+                    </tr>
+
+
+                    <?php echo '<tr></tr>'; ?>
                   @endforeach
                 </tbody>
               </table>
@@ -145,7 +161,7 @@ Emlak Ofisi Duzenle: {{$ofis->ofis_adi}} | Emlak Ofisi Yönetimi | YönetimPanel
         data: {userId:$(this).val()},
         dataType: 'json',
         success: function(msg){
-          $('#gorev-yetkileri').append('<tr><td>'+msg.username+'</td><td>'+msg.email+'</td><td><select name="yetkili_level[]"><option value="1">Yonetici</option><option value="2" selected="selected">Ofis Calisani</option></select>&nbsp;&nbsp;<a class="kaldir btn btn-primary btn-xs" href="#">Kaldir</a><input type="hidden" name="yetkili_id[]" value="'+msg.id+'"></td></tr>');
+          $('#gorev-yetkileri').append('<tr><td>'+msg.username+'</td><td>'+msg.email+'</td><td><select name="yetkili_level[]"><?php foreach($userGroups as $userGroup): echo "<option value=\"{$userGroup->id}\">{$userGroup->name}</option>"; endforeach; ?></select>&nbsp;&nbsp;<a class="kaldir btn btn-primary btn-xs" href="#">Kaldir</a><input type="hidden" name="yetkili_id[]" value="'+msg.id+'"></td></tr>');
         }
       });
 

@@ -247,7 +247,8 @@ class ofis extends Public_Controller {
 	{
 		$this->perm_check("/emlak/ofis/create");
 
-		$this->blade->render('emlak/ofis/create');
+		$data['userGroups'] = $this->db->select('*')->from('user_groups')->where('system_level', 0)->where('id != ', 5)->get()->result();
+		$this->blade->render('emlak/ofis/create', $data);
 	}
 
 	// save new user to db
@@ -278,7 +279,7 @@ class ofis extends Public_Controller {
 	public function edit($id)
 	{
 		$this->perm_check("/emlak/ofis/edit");
-
+		$data['userGroups'] = $this->db->select('*')->from('user_groups')->where('system_level', 0)->where('id != ', 5)->get()->result();
 		$data['yetkililer'] = $this->db->select('*')->where('ofis_id', $id)->get('emlak_ofis_calisanlari')->result();
 
 		$data['ofis'] = $this->emlak_model->get_by_id($id);
