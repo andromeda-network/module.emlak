@@ -7,7 +7,8 @@ $config['version'] 				= '1.0';
 $config['can_disable'] 			= true;
 $config['path'] 				= 'emlak';
 $config['icon'] 				= 'fa-building-o';
-
+$config['admin_menu_hook']		= 'emlak/ofis/_hook_admin_menu';
+$config['menu_type']			= 'hook';
 
 $config['contollers']			= array(
 									array(
@@ -47,7 +48,7 @@ $config['contollers']			= array(
 											array(
 												"key" => "/emlak/ofis/manage_self_office",
 												"description" => "Kendi ofis bilgilerini ve görevlileri yönetebilir"
-											)	
+											)
 										),
 									),
 

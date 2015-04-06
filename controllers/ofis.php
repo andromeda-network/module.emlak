@@ -220,9 +220,29 @@ class ofis extends Public_Controller {
 		redirect(base_url('core/module-manager'));
 	}
 
+	public function _hook_admin_menu()
+	{
+		$return = '';
+        $return .= '<li class="treeview">';
+        $return .= '<a href="#"><i class="fa fa-building"></i> <span>Emlak Yönetimi</span> <i class="fa fa-angle-left pull-right"></i></a>';
+        $return .= '<ul class="treeview-menu">';
+        $return .= '<li><a href="'.base_url('emlak').'"><i class="fa fa-dashboard nav-icon"></i> Genel Bakış</a></li>';
+        if(Modules::run('core/core/perm_check', "/emlak/ofis/manage", false) != false):
+        	$return .= '<li><a href="'.base_url('emlak/ofis').'"><i class="fa fa-building nav-icon"></i> Emlak Ofisleri</a></li>';
+        endif;
+        $return .'</ul>';
+        $return .'</li>';
+
+        return $return;
+	}
+
 	public function dashboard()
 	{
 		$data = null;
+		$data['totalMember'] = $this->db->select('*')->from('users')->get()->num_rows();
+		$data['totalSale'] = 0;
+		$data['totalAd'] = 0;
+		$data['totalFavorites'] = 0;
 		$this->blade->render('emlak/ofis/dashboard', $data);
 	}
 
@@ -266,9 +286,9 @@ class ofis extends Public_Controller {
 
 		$yetkililer = array();
 		for($i=0; $i<count($this->input->post('yetkili_level')); $i++) {
-			$yetkililer[$i]['user_id'] 	= $this->input->post('yetkili_id')[$i]; 
-			$yetkililer[$i]['type'] 		= $this->input->post('yetkili_level')[$i]; 
-			$yetkililer[$i]['ofis_id'] 	= $ofisId; 
+			$yetkililer[$i]['user_id'] 	= $this->input->post('yetkili_id')[$i];
+			$yetkililer[$i]['type'] 		= $this->input->post('yetkili_level')[$i];
+			$yetkililer[$i]['ofis_id'] 	= $ofisId;
 		}
 
 		$save = $this->db->insert_batch('emlak_ofis_calisanlari', $yetkililer);
@@ -302,9 +322,9 @@ class ofis extends Public_Controller {
 
 		$yetkililer = array();
 		for($i=0; $i<count($this->input->post('yetkili_level')); $i++) {
-			$yetkililer[$i]['user_id'] 	= $this->input->post('yetkili_id')[$i]; 
-			$yetkililer[$i]['type'] 	= $this->input->post('yetkili_level')[$i]; 
-			$yetkililer[$i]['ofis_id'] 	= $id; 
+			$yetkililer[$i]['user_id'] 	= $this->input->post('yetkili_id')[$i];
+			$yetkililer[$i]['type'] 	= $this->input->post('yetkili_level')[$i];
+			$yetkililer[$i]['ofis_id'] 	= $id;
 		}
 
 		$save = $this->db->insert_batch('emlak_ofis_calisanlari', $yetkililer);
@@ -322,7 +342,7 @@ class ofis extends Public_Controller {
 
 		$this->db->where('ofis_id', $id);
 		$this->db->delete('emlak_ofis_calisanlari');
-		
+
 		redirect(base_url('emlak/ofis'));
 	}
 
@@ -330,7 +350,7 @@ class ofis extends Public_Controller {
 
 
 
-	
+
 }
 
 /* End of file core.php */

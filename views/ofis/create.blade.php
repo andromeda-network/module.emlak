@@ -25,8 +25,6 @@ Yeni Emlak Ofisi Oluştur | Emlak Ofisi Yönetimi | YönetimPaneli
 
 
 @section('content')
-
-
       <div class="box">
         <div class="box-header with-border">
           <h3 class="box-title">Yeni Emlak Ofisi Oluştur</h3>
@@ -34,16 +32,16 @@ Yeni Emlak Ofisi Oluştur | Emlak Ofisi Yönetimi | YönetimPaneli
         <div class="box-body">
 
           <form id="validate-basic" action="{{base_url('emlak/ofis')}}" method="post" data-validate="parsley" class="form parsley-form">
-            
+
             <h4>Ofis Bilgileri</h4>
-            
+
             <div class="form-group">
               <label for="ofis_adi">Ofis Adi</label>
               <input type="ofis_adi" id="ofis_adi" name="ofis_adi" class="form-control" data-parsley-trigger="change" data-required="true" value="{{set_value('username')}}">
             </div>
 
             <hr>
-            
+
             <h4>Ofis Yetkilileri</h4>
             <div class="form-group">
               <label for="kullanici">Ofis Sahibi</label>
@@ -60,7 +58,7 @@ Yeni Emlak Ofisi Oluştur | Emlak Ofisi Yönetimi | YönetimPaneli
                   </tr>
                 </thead>
                 <tbody id="gorev-yetkileri">
-                
+
                 </tbody>
               </table>
             </div>
@@ -77,8 +75,6 @@ Yeni Emlak Ofisi Oluştur | Emlak Ofisi Yönetimi | YönetimPaneli
           Değişikliklerin kaydolması için lütfen yukarıda bulunan kaydet düğmesine tıklayın.
         </div><!-- /.box-footer-->
       </div>
-
-
 @endsection
 
 @section('scripts')
@@ -88,11 +84,11 @@ Yeni Emlak Ofisi Oluştur | Emlak Ofisi Yönetimi | YönetimPaneli
   <script src="/public/backend/plugins/select2/select2.min.js"></script>
   <script src="/public/backend/plugins/select2/select2_locale_tr.js"></script>
 
-  
+
   <script>
     $('#validate-basic').on("keyup keypress", function(e) {
-      var code = e.keyCode || e.which; 
-      if (code  == 13) {               
+      var code = e.keyCode || e.which;
+      if (code  == 13) {
         e.preventDefault();
         return false;
       }

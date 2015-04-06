@@ -2,9 +2,9 @@
 
 $route['emlak/install'] = 'ofis/install';
 $route['emlak/remove']  = 'ofis/remove';
- 
 
-$route['emlak'] = ($_SERVER['REQUEST_METHOD'] == 'GET') ? 'ofis/index' : 'ofis/store';
+
+$route['emlak'] = 'ofis/dashboard';
 $route['emlak/ofis'] = ($_SERVER['REQUEST_METHOD'] == 'GET') ? 'ofis/index' : 'ofis/store';
 $route['emlak/ofis/create'] = 'ofis/create';
 $route['emlak/ofis/(:num)'] = ($_SERVER['REQUEST_METHOD'] == 'GET') ? 'ofis/show/$1' : 'ofis/update/$1';
