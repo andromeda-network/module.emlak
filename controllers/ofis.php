@@ -227,6 +227,7 @@ class ofis extends Public_Controller {
         $return .= '<a href="#"><i class="fa fa-building"></i> <span>Emlak Yönetimi</span> <i class="fa fa-angle-left pull-right"></i></a>';
         $return .= '<ul class="treeview-menu">';
         $return .= '<li><a href="'.base_url('emlak').'"><i class="fa fa-dashboard nav-icon"></i> Genel Bakış</a></li>';
+		$return .= '<li><a href="'.base_url('emlak/ofisim').'"><i class="fa fa-building nav-icon"></i> Emlak Ofisim</a></li>';
         if(Modules::run('core/core/perm_check', "/emlak/ofis/manage", false) != false):
         	$return .= '<li><a href="'.base_url('emlak/ofis').'"><i class="fa fa-building nav-icon"></i> Emlak Ofisleri</a></li>';
         endif;
@@ -245,6 +246,32 @@ class ofis extends Public_Controller {
 		$data['totalFavorites'] = 0;
 		$this->blade->render('emlak/ofis/dashboard', $data);
 	}
+
+	public function myOffices()
+	{
+		$data['ofisler'] = $this->db->select('*')->from('emlak_ofis_calisanlari')->join('emlak_ofisleri', 'emlak_ofisleri.id = emlak_ofis_calisanlari.ofis_id')->where('emlak_ofis_calisanlari.user_id', $this->session->userdata('userId'))->get()->result();
+
+		$this->blade->render('emlak/ofis/my-offices', $data);
+	}
+
+	public function myOfficeDashboard($officeId)
+	{
+		// Kendi ofisine mi bakmaya çalışıyor kontrol edelim
+		$checkUser = $this->db->select('id')->from('emlak_ofis_calisanlari')->where('ofis_id', $officeId)->where('user_id', $this->session->userdata('userId'))->get()->num_rows();
+		if($checkUser == 0) {
+			redirect(base_url('core/error/401'));
+			exit();
+		}
+
+		$data['ofis'] = $this->db->select('*')->from('emlak_ofisleri')->where('id', $officeId)->get()->row();
+
+		$data['totalMember'] = $this->db->select('*')->from('users')->get()->num_rows();
+		$data['totalSale'] = 0;
+		$data['totalAd'] = 0;
+		$data['totalFavorites'] = 0;
+		$this->blade->render('emlak/ofis/office-dashboard', $data);
+	}
+
 
 	// list users
 	public function index()
