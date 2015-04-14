@@ -269,6 +269,7 @@ class ofis extends Public_Controller {
 		$data['totalSale'] = 0;
 		$data['totalAd'] = 0;
 		$data['totalFavorites'] = 0;
+		$data['ilanlar'] = $this->db->select('*')->from('emlak_ofisi_ilanlari')->where('ofis_id', $officeId)->get()->result();
 		$this->blade->render('emlak/ofis/office-dashboard', $data);
 	}
 

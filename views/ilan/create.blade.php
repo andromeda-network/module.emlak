@@ -39,6 +39,89 @@ Yeni Emlak İlanı Oluştur | Emlak İlan Yönetimi | YönetimPaneli
           <form id="validate-basic" action="{{base_url('emlak/ilan')}}" method="post" data-validate="parsley" class="form parsley-form">
 
             <h4>Ofis Bilgileri</h4>
+            <div class="form-group">
+              <label for="kategori">Kategori</label>
+              <select id="kategori" name="kategori" class="form-control select2" data-parsley-trigger="change" data-required="true">
+                <option>Kategori Seçin</option>
+                <option <?php if(set_value('kategori') == '1'): echo 'selected'; endif; ?> value="1">Konut (Kiralık)</option>
+                <option <?php if(set_value('kategori') == '2'): echo 'selected'; endif; ?> value="2">Konut (Satılık)</option>
+                <option <?php if(set_value('kategori') == '3'): echo 'selected'; endif; ?> value="3">İşyeri (Kiralık)</option>
+                <option <?php if(set_value('kategori') == '4'): echo 'selected'; endif; ?> value="4">İşyeri (Satılık)</option>
+                <option <?php if(set_value('kategori') == '5'): echo 'selected'; endif; ?> value="5">İşyeri (Devren)</option>
+                <option <?php if(set_value('kategori') == '6'): echo 'selected'; endif; ?> value="6">Arsa (Kiralık)</option>
+                <option <?php if(set_value('kategori') == '7'): echo 'selected'; endif; ?> value="7">Arsa (Satılık)</option>
+                <option <?php if(set_value('kategori') == '8'): echo 'selected'; endif; ?> value="8">Bina (Kiralık)</option>
+                <option <?php if(set_value('kategori') == '9'): echo 'selected'; endif; ?> value="9">Bina (Satılık)</option>
+                <option <?php if(set_value('kategori') == '10'): echo 'selected'; endif; ?> value="10">Devremülk (Akdeniz Bölgesi)</option>
+                <option <?php if(set_value('kategori') == '11'): echo 'selected'; endif; ?> value="11">Devremülk (Doğu Anadolu Bölgesi)</option>
+                <option <?php if(set_value('kategori') == '12'): echo 'selected'; endif; ?> value="12">Devremülk (Ege Bölgesi)</option>
+                <option <?php if(set_value('kategori') == '13'): echo 'selected'; endif; ?> value="13">Devremülk (İç Anadolu Bölgesi)</option>
+                <option <?php if(set_value('kategori') == '14'): echo 'selected'; endif; ?> value="14">Devremülk (Karadeniz Bölgesi)</option>
+                <option <?php if(set_value('kategori') == '15'): echo 'selected'; endif; ?> value="15">Devremülk (Kıbrıs)</option>
+                <option <?php if(set_value('kategori') == '16'): echo 'selected'; endif; ?> value="16">Devremülk (Marmara Bölgesi)</option>
+                <option <?php if(set_value('kategori') == '17'): echo 'selected'; endif; ?> value="17">Devremülk (Yurtdışı)</option>
+                <option <?php if(set_value('kategori') == '18'): echo 'selected'; endif; ?> value="18">Turistlik Tesis (Kiralık)</option>
+                <option <?php if(set_value('kategori') == '19'): echo 'selected'; endif; ?> value="19">Turistlik Tesis (Satılık)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="alt_kategori">Alt Kategori</label>
+              <select id="alt_kategori" name="alt_kategori" class="form-control select2">
+                <option>Lütfen Üst Kategori Seçin</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="ilan_tarihi">İlan Tarihi</label>
+              <input type="date" id="ilan_tarihi" name="ilan_tarihi"  value="{{set_value('ilan_tarihi')}}" class="form-control" data-parsley-trigger="change" data-required="true">
+            </div>
+
+            <div class="row">
+              <!--<div class="col-md-3 col-xs-12">
+                <div class="form-group">
+                  <label for="konum_ulke">Ülke</label>
+                  <select name="konum_ulke" id="konum_ulke" class="form-control">
+                    <option value="Türkiye">Türkiye</option>
+                  </select>
+                </div>
+              </div>-->
+              <div class="col-md-3 col-xs-12">
+                <div class="form-group">
+                  <label for="konum_sehir">Şehir</label>
+                  <select name="konum_sehir" id="konum_sehir" class="form-control">
+                    <option>Lütfen Şehir Seçin</option>
+                    @foreach($sehirler as $sehir)
+                    <option value="{{$sehir->sehir_id}}">{{$sehir->ad}}</option>
+                    @endforeach
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-3 col-xs-12">
+                <div class="form-group">
+                  <label for="konum_ilce">İlçe</label>
+                  <select name="konum_ilce" id="konum_ilce" class="form-control" data-parsley-trigger="change" data-required="true">
+                    <option>Lütfen Şehir Seçin</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-3 col-xs-12">
+                <div class="form-group">
+                  <label for="konum_semt">Semt</label>
+                  <select name="konum_semt" id="konum_semt" class="form-control" data-parsley-trigger="change" data-required="true">
+                    <option>Lütfen İlçe Seçin</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-3 col-xs-12">
+                <div class="form-group">
+                  <label for="konum_mahalle">Mahalle</label>
+                  <select name="konum_mahalle" id="konum_mahalle" class="form-control" data-parsley-trigger="change" data-required="true">
+                    <option>Lütfen Semt Seçin</option>
+                  </select>
+                </div>
+              </div>
+            </div>
 
             <div class="form-group">
               <label for="ilan_baslik">İlan Başlık</label>
@@ -50,44 +133,58 @@ Yeni Emlak İlanı Oluştur | Emlak İlan Yönetimi | YönetimPaneli
               <textarea id="emlak_aciklama" name="emlak_aciklama" class="form-control">{{set_value('emlak_aciklama')}}</textarea>
             </div>
 
-            <div class="form-group">
-              <label for="emlak_fiyat">Fiyat</label>
-              <input type="text" id="emlak_fiyat" name="emlak_fiyat"  value="{{set_value('emlak_fiyat')}}" class="form-control" data-parsley-trigger="change" data-required="true">
+            <div class="row">
+              <div class="col-md-9">
+                <div class="form-group">
+                  <label for="emlak_fiyat">Fiyat</label>
+                  <input type="text" id="emlak_fiyat" name="emlak_fiyat"  value="{{set_value('emlak_fiyat')}}" class="form-control" data-parsley-trigger="change" data-required="true">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="emlak_fiyat_birimi">Fiyat Birimi</label>
+                  <select id="emlak_fiyat_birimi" name="emlak_fiyat_birimi"  class="form-control" data-parsley-trigger="change" data-required="true">
+                    <option <?php if(set_value('emlak_fiyat_birimi') == 'tl'): echo 'selected'; endif; ?> value="tl">Türk Lirası</option>
+                    <option <?php if(set_value('emlak_fiyat_birimi') == 'dolar'): echo 'selected'; endif; ?> value="dolar">Dolar</option>
+                    <option <?php if(set_value('emlak_fiyat_birimi') == 'euro'): echo 'selected'; endif; ?> value="euro">Euro</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-9">
+                <div class="form-group">
+                  <label for="emlak_aidat">Aidat Ücreti</label>
+                  <input type="text" id="emlak_aidat" name="emlak_aidat"  value="{{set_value('emlak_aidat')}}" class="form-control" data-parsley-trigger="change" data-required="true">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="emlak_aidat_fiyat_birimi">Fiyat Birimi</label>
+                  <select id="emlak_aidat_fiyat_birimi" name="emlak_aidat_fiyat_birimi"  class="form-control" data-parsley-trigger="change" data-required="true">
+                    <option <?php if(set_value('emlak_aidat_fiyat_birimi') == 'tl'): echo 'selected'; endif; ?> value="tl">Türk Lirası</option>
+                    <option <?php if(set_value('emlak_aidat_fiyat_birimi') == 'dolar'): echo 'selected'; endif; ?> value="dolar">Dolar</option>
+                    <option <?php if(set_value('emlak_aidat_fiyat_birimi') == 'euro'): echo 'selected'; endif; ?> value="euro">Euro</option>
+                  </select>
+                </div>
+              </div>
             </div>
 
             <div class="form-group">
-              <label for="konum_ulke">Ülke</label>
-              <input type="text" id="konum_ulke" name="konum_ulke"  value="{{set_value('konum_ulke')}}" class="form-control" data-parsley-trigger="change" data-required="true">
+              <label for="emlak_krediye_uygun">Krediye Uygun</label>
+              <select id="emlak_krediye_uygun" name="emlak_krediye_uygun" class="form-control" data-parsley-trigger="change" data-required="true">
+                <option value="0">Hayır</option>
+                <option value="1" <?php if(set_value('emlak_krediye_uygun') == 1): echo 'selected'; endif; ?>>Evet</option>
+              </select>
             </div>
 
             <div class="form-group">
-              <label for="konum_sehir">Şehir</label>
-              <input type="text" id="konum_sehir" name="konum_sehir"  value="{{set_value('konum_sehir')}}" class="form-control" data-parsley-trigger="change" data-required="true">
-            </div>
-
-            <div class="form-group">
-              <label for="konum_ilce">İlçe</label>
-              <input type="text" id="konum_ilce" name="konum_ilce"  value="{{set_value('konum_ilce')}}" class="form-control" data-parsley-trigger="change" data-required="true">
-            </div>
-
-            <div class="form-group">
-              <label for="konum_mahalle">Mahalle</label>
-              <input type="text" id="konum_mahalle" name="konum_mahalle"  value="{{set_value('konum_mahalle')}}" class="form-control" data-parsley-trigger="change" data-required="true">
-            </div>
-
-            <div class="form-group">
-              <label for="ilan_no">İlan No</label>
-              <input type="text" id="ilan_no" name="ilan_no"  value="{{set_value('ilan_no')}}" class="form-control" data-parsley-trigger="change" data-required="true">
-            </div>
-
-            <div class="form-group">
-              <label for="ilan_tarihi">İlan Tarihi</label>
-              <input type="text" id="ilan_tarihi" name="ilan_tarihi"  value="{{set_value('ilan_tarihi')}}" class="form-control" data-parsley-trigger="change" data-required="true">
-            </div>
-
-            <div class="form-group">
-              <label for="emlak_tipi">Emlak Tipi</label>
-              <input type="text" id="emlak_tipi" name="emlak_tipi"  value="{{set_value('emlak_tipi')}}" class="form-control" data-parsley-trigger="change" data-required="true">
+              <label for="emlak_takas">Takasa Uygun</label>
+              <select id="emlak_takas" name="emlak_takas" class="form-control" data-parsley-trigger="change" data-required="true">
+                <option value="0">Hayır</option>
+                <option value="1" <?php if(set_value('emlak_takas') == 1): echo 'selected'; endif; ?>>Evet</option>
+              </select>
             </div>
 
             <div class="form-group">
@@ -95,125 +192,230 @@ Yeni Emlak İlanı Oluştur | Emlak İlan Yönetimi | YönetimPaneli
               <input type="text" id="emlak_metrekare" name="emlak_metrekare"  value="{{set_value('emlak_metrekare')}}" class="form-control" data-parsley-trigger="change" data-required="true">
             </div>
 
-            <div class="form-group">
-              <label for="emlak_oda_sayisi">Oda Sayısı</label>
-              <select id="emlak_oda_sayisi" name="emlak_oda_sayisi" class="form-control" data-parsley-trigger="change" data-required="true">
-                <option value="" class="">Seçiniz</option>
-                <option <?php if(set_value('emlak_oda_sayisi') == '0'): echo 'selected'; endif; ?> value="0">Stüdyo (1+0)</option>
-                <option <?php if(set_value('emlak_oda_sayisi') == '1'): echo 'selected'; endif; ?> value="1">1</option>
-                <option <?php if(set_value('emlak_oda_sayisi') == '2'): echo 'selected'; endif; ?> value="2">1+1</option>
-                <option <?php if(set_value('emlak_oda_sayisi') == '3'): echo 'selected'; endif; ?> value="3">2+1</option>
-                <option <?php if(set_value('emlak_oda_sayisi') == '4'): echo 'selected'; endif; ?> value="4">2+2</option>
-                <option <?php if(set_value('emlak_oda_sayisi') == '5'): echo 'selected'; endif; ?> value="5">3+1</option>
-                <option <?php if(set_value('emlak_oda_sayisi') == '6'): echo 'selected'; endif; ?> value="6">3+2</option>
-                <option <?php if(set_value('emlak_oda_sayisi') == '7'): echo 'selected'; endif; ?> value="7">4+1</option>
-                <option <?php if(set_value('emlak_oda_sayisi') == '8'): echo 'selected'; endif; ?> value="8">4+2</option>
-                <option <?php if(set_value('emlak_oda_sayisi') == '9'): echo 'selected'; endif; ?> value="9">4+3</option>
-                <option <?php if(set_value('emlak_oda_sayisi') == '10'): echo 'selected'; endif; ?> value="10">4+4</option>
-                <option <?php if(set_value('emlak_oda_sayisi') == '11'): echo 'selected'; endif; ?> value="11">5</option>
-                <option <?php if(set_value('emlak_oda_sayisi') == '12'): echo 'selected'; endif; ?> value="12">5+1</option>
-                <option <?php if(set_value('emlak_oda_sayisi') == '13'): echo 'selected'; endif; ?> value="13">5+2</option>
-                <option <?php if(set_value('emlak_oda_sayisi') == '14'): echo 'selected'; endif; ?> value="14">5+3</option>
-                <option <?php if(set_value('emlak_oda_sayisi') == '15'): echo 'selected'; endif; ?> value="15">5+4</option>
-                <option <?php if(set_value('emlak_oda_sayisi') == '16'): echo 'selected'; endif; ?> value="16">6+1</option>
-                <option <?php if(set_value('emlak_oda_sayisi') == '17'): echo 'selected'; endif; ?> value="17">6+2</option>
-                <option <?php if(set_value('emlak_oda_sayisi') == '18'): echo 'selected'; endif; ?> value="18">6+3</option>
-                <option <?php if(set_value('emlak_oda_sayisi') == '19'): echo 'selected'; endif; ?> value="19">7+1</option>
-                <option <?php if(set_value('emlak_oda_sayisi') == '20'): echo 'selected'; endif; ?> value="20">7+2</option>
-                <option <?php if(set_value('emlak_oda_sayisi') == '21'): echo 'selected'; endif; ?> value="21">7+3</option>
-                <option <?php if(set_value('emlak_oda_sayisi') == '22'): echo 'selected'; endif; ?> value="22">8+1</option>
-                <option <?php if(set_value('emlak_oda_sayisi') == '23'): echo 'selected'; endif; ?> value="23">8+2</option>
-                <option <?php if(set_value('emlak_oda_sayisi') == '24'): echo 'selected'; endif; ?> value="24">8+3</option>
-                <option <?php if(set_value('emlak_oda_sayisi') == '25'): echo 'selected'; endif; ?> value="25">8+4</option>
-                <option <?php if(set_value('emlak_oda_sayisi') == '26'): echo 'selected'; endif; ?> value="26">9+1</option>
-                <option <?php if(set_value('emlak_oda_sayisi') == '27'): echo 'selected'; endif; ?> value="27">9+2</option>
-                <option <?php if(set_value('emlak_oda_sayisi') == '28'): echo 'selected'; endif; ?> value="28">9+3</option>
-                <option <?php if(set_value('emlak_oda_sayisi') == '29'): echo 'selected'; endif; ?> value="29">9+4</option>
-                <option <?php if(set_value('emlak_oda_sayisi') == '30'): echo 'selected'; endif; ?> value="30">9+5</option>
-                <option <?php if(set_value('emlak_oda_sayisi') == '31'): echo 'selected'; endif; ?> value="31">9+6</option>
-                <option <?php if(set_value('emlak_oda_sayisi') == '32'): echo 'selected'; endif; ?> value="32">10+1</option>
-                <option <?php if(set_value('emlak_oda_sayisi') == '33'): echo 'selected'; endif; ?> value="33">10+2</option>
-                <option <?php if(set_value('emlak_oda_sayisi') == '34'): echo 'selected'; endif; ?> value="34">10 Üzeri</option>
-              </select>
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="emlak_oda_sayisi">Oda Sayısı</label>
+                  <select id="emlak_oda_sayisi" name="emlak_oda_sayisi" class="form-control" data-parsley-trigger="change" data-required="true">
+                    <option value="" class="">Seçiniz</option>
+                    <option <?php if(set_value('emlak_oda_sayisi') == '0'): echo 'selected'; endif; ?> value="0">Stüdyo (1+0)</option>
+                    <option <?php if(set_value('emlak_oda_sayisi') == '1'): echo 'selected'; endif; ?> value="1">1</option>
+                    <option <?php if(set_value('emlak_oda_sayisi') == '2'): echo 'selected'; endif; ?> value="2">1+1</option>
+                    <option <?php if(set_value('emlak_oda_sayisi') == '3'): echo 'selected'; endif; ?> value="3">2+1</option>
+                    <option <?php if(set_value('emlak_oda_sayisi') == '4'): echo 'selected'; endif; ?> value="4">2+2</option>
+                    <option <?php if(set_value('emlak_oda_sayisi') == '5'): echo 'selected'; endif; ?> value="5">3+1</option>
+                    <option <?php if(set_value('emlak_oda_sayisi') == '6'): echo 'selected'; endif; ?> value="6">3+2</option>
+                    <option <?php if(set_value('emlak_oda_sayisi') == '7'): echo 'selected'; endif; ?> value="7">4+1</option>
+                    <option <?php if(set_value('emlak_oda_sayisi') == '8'): echo 'selected'; endif; ?> value="8">4+2</option>
+                    <option <?php if(set_value('emlak_oda_sayisi') == '9'): echo 'selected'; endif; ?> value="9">4+3</option>
+                    <option <?php if(set_value('emlak_oda_sayisi') == '10'): echo 'selected'; endif; ?> value="10">4+4</option>
+                    <option <?php if(set_value('emlak_oda_sayisi') == '11'): echo 'selected'; endif; ?> value="11">5</option>
+                    <option <?php if(set_value('emlak_oda_sayisi') == '12'): echo 'selected'; endif; ?> value="12">5+1</option>
+                    <option <?php if(set_value('emlak_oda_sayisi') == '13'): echo 'selected'; endif; ?> value="13">5+2</option>
+                    <option <?php if(set_value('emlak_oda_sayisi') == '14'): echo 'selected'; endif; ?> value="14">5+3</option>
+                    <option <?php if(set_value('emlak_oda_sayisi') == '15'): echo 'selected'; endif; ?> value="15">5+4</option>
+                    <option <?php if(set_value('emlak_oda_sayisi') == '16'): echo 'selected'; endif; ?> value="16">6+1</option>
+                    <option <?php if(set_value('emlak_oda_sayisi') == '17'): echo 'selected'; endif; ?> value="17">6+2</option>
+                    <option <?php if(set_value('emlak_oda_sayisi') == '18'): echo 'selected'; endif; ?> value="18">6+3</option>
+                    <option <?php if(set_value('emlak_oda_sayisi') == '19'): echo 'selected'; endif; ?> value="19">7+1</option>
+                    <option <?php if(set_value('emlak_oda_sayisi') == '20'): echo 'selected'; endif; ?> value="20">7+2</option>
+                    <option <?php if(set_value('emlak_oda_sayisi') == '21'): echo 'selected'; endif; ?> value="21">7+3</option>
+                    <option <?php if(set_value('emlak_oda_sayisi') == '22'): echo 'selected'; endif; ?> value="22">8+1</option>
+                    <option <?php if(set_value('emlak_oda_sayisi') == '23'): echo 'selected'; endif; ?> value="23">8+2</option>
+                    <option <?php if(set_value('emlak_oda_sayisi') == '24'): echo 'selected'; endif; ?> value="24">8+3</option>
+                    <option <?php if(set_value('emlak_oda_sayisi') == '25'): echo 'selected'; endif; ?> value="25">8+4</option>
+                    <option <?php if(set_value('emlak_oda_sayisi') == '26'): echo 'selected'; endif; ?> value="26">9+1</option>
+                    <option <?php if(set_value('emlak_oda_sayisi') == '27'): echo 'selected'; endif; ?> value="27">9+2</option>
+                    <option <?php if(set_value('emlak_oda_sayisi') == '28'): echo 'selected'; endif; ?> value="28">9+3</option>
+                    <option <?php if(set_value('emlak_oda_sayisi') == '29'): echo 'selected'; endif; ?> value="29">9+4</option>
+                    <option <?php if(set_value('emlak_oda_sayisi') == '30'): echo 'selected'; endif; ?> value="30">9+5</option>
+                    <option <?php if(set_value('emlak_oda_sayisi') == '31'): echo 'selected'; endif; ?> value="31">9+6</option>
+                    <option <?php if(set_value('emlak_oda_sayisi') == '32'): echo 'selected'; endif; ?> value="32">10+1</option>
+                    <option <?php if(set_value('emlak_oda_sayisi') == '33'): echo 'selected'; endif; ?> value="33">10+2</option>
+                    <option <?php if(set_value('emlak_oda_sayisi') == '34'): echo 'selected'; endif; ?> value="34">10 Üzeri</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label for="emlak_banyo_sayisi">Banyo Sayısı</label>
+                  <select id="emlak_banyo_sayisi" name="emlak_banyo_sayisi" class="form-control" data-parsley-trigger="change" data-required="true">
+                    <option <?php if(set_value('emlak_banyo_sayisi') == 'Yok'): echo 'selected'; endif; ?> value="0">Yok</option>
+                    <option <?php if(set_value('emlak_banyo_sayisi') == '1'): echo 'selected'; endif; ?> value="1">1</option>
+                    <option <?php if(set_value('emlak_banyo_sayisi') == '2'): echo 'selected'; endif; ?> value="2">2</option>
+                    <option <?php if(set_value('emlak_banyo_sayisi') == '3'): echo 'selected'; endif; ?> value="3">3</option>
+                    <option <?php if(set_value('emlak_banyo_sayisi') == '4'): echo 'selected'; endif; ?> value="4">4</option>
+                    <option <?php if(set_value('emlak_banyo_sayisi') == '5'): echo 'selected'; endif; ?> value="5">5</option>
+                    <option <?php if(set_value('emlak_banyo_sayisi') == '6'): echo 'selected'; endif; ?> value="6">6</option>
+                    <option <?php if(set_value('emlak_banyo_sayisi') == '6 Üzeri'): echo 'selected'; endif; ?> value="7">6 Üzeri</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label for="emlak_bina_yasi">Bina Yaşı</label>
+                  <select id="emlak_bina_yasi" name="emlak_bina_yasi"  class="form-control" data-parsley-trigger="change" data-required="true">
+                    <option <?php if(set_value('emlak_bina_yasi') == '0'): echo 'selected'; endif; ?> value="0">0</option>
+                    <option <?php if(set_value('emlak_bina_yasi') == '1'): echo 'selected'; endif; ?> value="1">1</option>
+                    <option <?php if(set_value('emlak_bina_yasi') == '2'): echo 'selected'; endif; ?> value="2">2</option>
+                    <option <?php if(set_value('emlak_bina_yasi') == '3'): echo 'selected'; endif; ?> value="3">3</option>
+                    <option <?php if(set_value('emlak_bina_yasi') == '4'): echo 'selected'; endif; ?> value="4">4</option>
+                    <option <?php if(set_value('emlak_bina_yasi') == '5-10 arası'): echo 'selected'; endif; ?> value="5-10 arası">5-10 arası</option>
+                    <option <?php if(set_value('emlak_bina_yasi') == '11-15 arası'): echo 'selected'; endif; ?> value="11-15 arası">11-15 arası</option>
+                    <option <?php if(set_value('emlak_bina_yasi') == '16-20 arası'): echo 'selected'; endif; ?> value="16-20 arası">16-20 arası</option>
+                    <option <?php if(set_value('emlak_bina_yasi') == '21-25 arası'): echo 'selected'; endif; ?> value="21-25 arası">21-25 arası</option>
+                    <option <?php if(set_value('emlak_bina_yasi') == '26-30 arası'): echo 'selected'; endif; ?> value="26-30 arası">26-30 arası</option>
+                    <option <?php if(set_value('emlak_bina_yasi') == '31 ve üzeri'): echo 'selected'; endif; ?> value="31 ve üzeri">31 ve üzeri</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label for="emlak_kat_sayisi">Binadaki Kat Sayısı</label>
+                  <select name="emlak_kat_sayisi" id="emlak_kat_sayisi" class="form-control" data-parsley-trigger="change" data-required="true">
+                    <option <?php if(set_value('emlak_banyo_sayisi') == '1'): echo 'selected'; endif; ?> value="1">1</option>
+                    <option <?php if(set_value('emlak_banyo_sayisi') == '2'): echo 'selected'; endif; ?> value="2">2</option>
+                    <option <?php if(set_value('emlak_banyo_sayisi') == '3'): echo 'selected'; endif; ?> value="3">3</option>
+                    <option <?php if(set_value('emlak_banyo_sayisi') == '4'): echo 'selected'; endif; ?> value="4">4</option>
+                    <option <?php if(set_value('emlak_banyo_sayisi') == '5'): echo 'selected'; endif; ?> value="5">5</option>
+                    <option <?php if(set_value('emlak_banyo_sayisi') == '6'): echo 'selected'; endif; ?> value="6">6</option>
+                    <option <?php if(set_value('emlak_banyo_sayisi') == '7'): echo 'selected'; endif; ?> value="7">7</option>
+                    <option <?php if(set_value('emlak_banyo_sayisi') == '8'): echo 'selected'; endif; ?> value="8">8</option>
+                    <option <?php if(set_value('emlak_banyo_sayisi') == '9'): echo 'selected'; endif; ?> value="9">9</option>
+                    <option <?php if(set_value('emlak_banyo_sayisi') == '10'): echo 'selected'; endif; ?> value="10">10</option>
+                    <option <?php if(set_value('emlak_banyo_sayisi') == '11'): echo 'selected'; endif; ?> value="11">11</option>
+                    <option <?php if(set_value('emlak_banyo_sayisi') == '12'): echo 'selected'; endif; ?> value="12">12</option>
+                    <option <?php if(set_value('emlak_banyo_sayisi') == '13'): echo 'selected'; endif; ?> value="13">13</option>
+                    <option <?php if(set_value('emlak_banyo_sayisi') == '14'): echo 'selected'; endif; ?> value="14">14</option>
+                    <option <?php if(set_value('emlak_banyo_sayisi') == '15'): echo 'selected'; endif; ?> value="15">15</option>
+                    <option <?php if(set_value('emlak_banyo_sayisi') == '16'): echo 'selected'; endif; ?> value="16">16</option>
+                    <option <?php if(set_value('emlak_banyo_sayisi') == '17'): echo 'selected'; endif; ?> value="17">17</option>
+                    <option <?php if(set_value('emlak_banyo_sayisi') == '18'): echo 'selected'; endif; ?> value="18">18</option>
+                    <option <?php if(set_value('emlak_banyo_sayisi') == '19'): echo 'selected'; endif; ?> value="19">19</option>
+                    <option <?php if(set_value('emlak_banyo_sayisi') == '20'): echo 'selected'; endif; ?> value="20">20</option>
+                    <option <?php if(set_value('emlak_banyo_sayisi') == '21'): echo 'selected'; endif; ?> value="21">21</option>
+                    <option <?php if(set_value('emlak_banyo_sayisi') == '22'): echo 'selected'; endif; ?> value="22">22</option>
+                    <option <?php if(set_value('emlak_banyo_sayisi') == '23'): echo 'selected'; endif; ?> value="23">23</option>
+                    <option <?php if(set_value('emlak_banyo_sayisi') == '24'): echo 'selected'; endif; ?> value="24">24</option>
+                    <option <?php if(set_value('emlak_banyo_sayisi') == '25'): echo 'selected'; endif; ?> value="25">25</option>
+                    <option <?php if(set_value('emlak_banyo_sayisi') == '26'): echo 'selected'; endif; ?> value="26">26</option>
+                    <option <?php if(set_value('emlak_banyo_sayisi') == '27'): echo 'selected'; endif; ?> value="27">27</option>
+                    <option <?php if(set_value('emlak_banyo_sayisi') == '28'): echo 'selected'; endif; ?> value="28">28</option>
+                    <option <?php if(set_value('emlak_banyo_sayisi') == '29'): echo 'selected'; endif; ?> value="29">29</option>
+                    <option <?php if(set_value('emlak_banyo_sayisi') == '30'): echo 'selected'; endif; ?> value="30">30 ve üzeri</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="emlak_bulundugu_kat">Bulunduğu Kat</label>
+                  <select name="emlak_bulundugu_kat" id="emlak_bulundugu_kat" class="form-control" data-parsley-trigger="change" data-required="true">
+                    <option <?php if(set_value('emlak_bulundugu_kat') == 'Bahçe Katı'): echo 'selected'; endif; ?> value="Bahçe Katı">Bahçe Katı</option>
+                    <option <?php if(set_value('emlak_bulundugu_kat') == 'Kot 1'): echo 'selected'; endif; ?> value="Kot 1">Kot 1</option>
+                    <option <?php if(set_value('emlak_bulundugu_kat') == 'Kot 2'): echo 'selected'; endif; ?> value="Kot 2">Kot 2</option>
+                    <option <?php if(set_value('emlak_bulundugu_kat') == 'Kot 3'): echo 'selected'; endif; ?> value="Kot 3">Kot 3</option>
+                    <option <?php if(set_value('emlak_bulundugu_kat') == 'Kot 4'): echo 'selected'; endif; ?> value="Kot 4">Kot 4</option>
+                    <option <?php if(set_value('emlak_bulundugu_kat') == 'Müstakil'): echo 'selected'; endif; ?> value="Müstakil">Müstakil</option>
+                    <option <?php if(set_value('emlak_bulundugu_kat') == 'Villa Tipi'): echo 'selected'; endif; ?> value="Villa Tipi">Villa Tipi</option>
+                    <option <?php if(set_value('emlak_bulundugu_kat') == 'Bodrum Kat'): echo 'selected'; endif; ?> value="Bodrum Kat">Bodrum Kat</option>
+                    <option <?php if(set_value('emlak_bulundugu_kat') == 'Zemin Kat'): echo 'selected'; endif; ?> value="Zemin Kat">Zemin Kat</option>
+                    <option <?php if(set_value('emlak_bulundugu_kat') == 'Giriş Katı'): echo 'selected'; endif; ?> value="Giriş Katı">Giriş Katı</option>
+                    <option <?php if(set_value('emlak_bulundugu_kat') == 'Yüksek Giriş'): echo 'selected'; endif; ?> value="Yüksek Giriş">Yüksek Giriş</option>
+                    <option <?php if(set_value('emlak_bulundugu_kat') == 'Çatı Katı'): echo 'selected'; endif; ?> value="Çatı Katı">Çatı Katı</option>
+                    <option <?php if(set_value('emlak_bulundugu_kat') == '1'): echo 'selected'; endif; ?> value="1">1</option>
+                    <option <?php if(set_value('emlak_bulundugu_kat') == '2'): echo 'selected'; endif; ?> value="2">2</option>
+                    <option <?php if(set_value('emlak_bulundugu_kat') == '3'): echo 'selected'; endif; ?> value="3">3</option>
+                    <option <?php if(set_value('emlak_bulundugu_kat') == '4'): echo 'selected'; endif; ?> value="4">4</option>
+                    <option <?php if(set_value('emlak_bulundugu_kat') == '5'): echo 'selected'; endif; ?> value="5">5</option>
+                    <option <?php if(set_value('emlak_bulundugu_kat') == '6'): echo 'selected'; endif; ?> value="6">6</option>
+                    <option <?php if(set_value('emlak_bulundugu_kat') == '7'): echo 'selected'; endif; ?> value="7">7</option>
+                    <option <?php if(set_value('emlak_bulundugu_kat') == '8'): echo 'selected'; endif; ?> value="8">8</option>
+                    <option <?php if(set_value('emlak_bulundugu_kat') == '9'): echo 'selected'; endif; ?> value="9">9</option>
+                    <option <?php if(set_value('emlak_bulundugu_kat') == '10'): echo 'selected'; endif; ?> value="10">10</option>
+                    <option <?php if(set_value('emlak_bulundugu_kat') == '11'): echo 'selected'; endif; ?> value="11">11</option>
+                    <option <?php if(set_value('emlak_bulundugu_kat') == '12'): echo 'selected'; endif; ?> value="12">12</option>
+                    <option <?php if(set_value('emlak_bulundugu_kat') == '13'): echo 'selected'; endif; ?> value="13">13</option>
+                    <option <?php if(set_value('emlak_bulundugu_kat') == '14'): echo 'selected'; endif; ?> value="14">14</option>
+                    <option <?php if(set_value('emlak_bulundugu_kat') == '15'): echo 'selected'; endif; ?> value="15">15</option>
+                    <option <?php if(set_value('emlak_bulundugu_kat') == '16'): echo 'selected'; endif; ?> value="16">16</option>
+                    <option <?php if(set_value('emlak_bulundugu_kat') == '17'): echo 'selected'; endif; ?> value="17">17</option>
+                    <option <?php if(set_value('emlak_bulundugu_kat') == '18'): echo 'selected'; endif; ?> value="18">18</option>
+                    <option <?php if(set_value('emlak_bulundugu_kat') == '19'): echo 'selected'; endif; ?> value="19">19</option>
+                    <option <?php if(set_value('emlak_bulundugu_kat') == '20'): echo 'selected'; endif; ?> value="20">20</option>
+                    <option <?php if(set_value('emlak_bulundugu_kat') == '21'): echo 'selected'; endif; ?> value="21">21</option>
+                    <option <?php if(set_value('emlak_bulundugu_kat') == '22'): echo 'selected'; endif; ?> value="22">22</option>
+                    <option <?php if(set_value('emlak_bulundugu_kat') == '23'): echo 'selected'; endif; ?> value="23">23</option>
+                    <option <?php if(set_value('emlak_bulundugu_kat') == '24'): echo 'selected'; endif; ?> value="24">24</option>
+                    <option <?php if(set_value('emlak_bulundugu_kat') == '25'): echo 'selected'; endif; ?> value="25">25</option>
+                    <option <?php if(set_value('emlak_bulundugu_kat') == '26'): echo 'selected'; endif; ?> value="26">26</option>
+                    <option <?php if(set_value('emlak_bulundugu_kat') == '27'): echo 'selected'; endif; ?> value="27">27</option>
+                    <option <?php if(set_value('emlak_bulundugu_kat') == '28'): echo 'selected'; endif; ?> value="28">28</option>
+                    <option <?php if(set_value('emlak_bulundugu_kat') == '29'): echo 'selected'; endif; ?> value="29">29</option>
+                    <option <?php if(set_value('emlak_bulundugu_kat') == '30 ve üzeri'): echo 'selected'; endif; ?> value="30 ve üzeri">30 ve üzeri</option>
+                  </select>
+                </div>
+              </div>
             </div>
 
-            <div class="form-group">
-              <label for="emlak_banyo_sayisi">Banyo Sayısı</label>
-              <input type="text"   value="{{set_value('emlak_banyo_sayisi')}}" >
-              <select id="emlak_banyo_sayisi" name="emlak_banyo_sayisi" class="form-control" data-parsley-trigger="change" data-required="true">
-                <option <?php if(set_value('emlak_banyo_sayisi') == 'Yok'): echo 'selected'; endif; ?> value="0">Yok</option>
-                <option <?php if(set_value('emlak_banyo_sayisi') == '1'): echo 'selected'; endif; ?> value="1">1</option>
-                <option <?php if(set_value('emlak_banyo_sayisi') == '2'): echo 'selected'; endif; ?> value="2">2</option>
-                <option <?php if(set_value('emlak_banyo_sayisi') == '3'): echo 'selected'; endif; ?> value="3">3</option>
-                <option <?php if(set_value('emlak_banyo_sayisi') == '4'): echo 'selected'; endif; ?> value="4">4</option>
-                <option <?php if(set_value('emlak_banyo_sayisi') == '5'): echo 'selected'; endif; ?> value="5">5</option>
-                <option <?php if(set_value('emlak_banyo_sayisi') == '6'): echo 'selected'; endif; ?> value="6">6</option>
-                <option <?php if(set_value('emlak_banyo_sayisi') == '6 Üzeri'): echo 'selected'; endif; ?> value="7">6 Üzeri</option>
-              </select>
-            </div>
 
-            <div class="form-group">
-              <label for="emlak_bina_yasi">Bina Yaşı</label>
-              <input type="text" id="emlak_bina_yasi" name="emlak_bina_yasi"  value="{{set_value('emlak_bina_yasi')}}" class="form-control" data-parsley-trigger="change" data-required="true">
-            </div>
-
-            <div class="form-group">
-              <label for="emlak_kat_sayisi">Binadaki Kat Sayısı</label>
-              <input type="text" id="emlak_kat_sayisi" name="emlak_kat_sayisi"  value="{{set_value('emlak_kat_sayisi')}}" class="form-control" data-parsley-trigger="change" data-required="true">
-            </div>
-
-            <div class="form-group">
-              <label for="emlak_bulundugu_kat">Bulunduğu Kat</label>
-              <input type="text" id="emlak_bulundugu_kat" name="emlak_bulundugu_kat"  value="{{set_value('emlak_bulundugu_kat')}}" class="form-control" data-parsley-trigger="change" data-required="true">
-            </div>
-
-            <div class="form-group">
-              <label for="emlak_aidat">Aidat Ücreti</label>
-              <input type="text" id="emlak_aidat" name="emlak_aidat"  value="{{set_value('emlak_aidat')}}" class="form-control" data-parsley-trigger="change" data-required="true">
-            </div>
-
-            <div class="form-group">
-              <label for="emlak_isitma">Isıtma Tipi</label>
-              <input type="text" id="emlak_isitma" name="emlak_isitma"  value="{{set_value('emlak_isitma')}}" class="form-control" data-parsley-trigger="change" data-required="true">
-            </div>
-
-            <div class="form-group">
-              <label for="emlak_esyali">Eşyalı</label>
-              <input type="text" id="emlak_esyali" name="emlak_esyali"  value="{{set_value('emlak_esyali')}}" class="form-control" data-parsley-trigger="change" data-required="true">
-            </div>
-
-            <div class="form-group">
-              <label for="emlak_kullanim_durumu">Kullanım Durumu</label>
-              <input type="text" id="emlak_kullanim_durumu" name="emlak_kullanim_durumu"  value="{{set_value('emlak_kullanim_durumu')}}" class="form-control" data-parsley-trigger="change" data-required="true">
-            </div>
-
-            <div class="form-group">
-              <label for="emlak_site_icersinde">Site İçersinde</label>
-              <input type="text" id="emlak_site_icersinde" name="emlak_site_icersinde"  value="{{set_value('emlak_site_icersinde')}}" class="form-control" data-parsley-trigger="change" data-required="true">
-            </div>
-
-            <div class="form-group">
-              <label for="emlak_krediye_uygun">Krediye Uygun</label>
-              <input type="text" id="emlak_krediye_uygun" name="emlak_krediye_uygun"  value="{{set_value('emlak_krediye_uygun')}}" class="form-control" data-parsley-trigger="change" data-required="true">
-            </div>
-
-            <div class="form-group">
-              <label for="emlak_takas">Takasa Uygun</label>
-              <input type="text" id="emlak_takas" name="emlak_takas"  value="{{set_value('emlak_takas')}}" class="form-control" data-parsley-trigger="change" data-required="true">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="emlak_isitma">Isıtma Tipi</label>
+                  <select id="emlak_isitma" name="emlak_isitma"  value="{{set_value('emlak_isitma')}}" class="form-control" data-parsley-trigger="change" data-required="true">
+                    <option <?php if(set_value('emlak_isitma') == 'Yok'): echo 'selected'; endif; ?> value="Yok">Yok</option>
+                    <option <?php if(set_value('emlak_isitma') == 'Soba'): echo 'selected'; endif; ?> value="Soba">Soba</option>
+                    <option <?php if(set_value('emlak_isitma') == 'Doğalgaz Sobası'): echo 'selected'; endif; ?> value="Doğalgaz Sobası">Doğalgaz Sobası</option>
+                    <option <?php if(set_value('emlak_isitma') == 'Kat Kaloriferi'): echo 'selected'; endif; ?> value="Kat Kaloriferi">Kat Kaloriferi</option>
+                    <option <?php if(set_value('emlak_isitma') == 'Merkezi Sistem'): echo 'selected'; endif; ?> value="Merkezi Sistem">Merkezi Sistem</option>
+                    <option <?php if(set_value('emlak_isitma') == 'Merkezi Sistem (Isı Pay Ölçer)'): echo 'selected'; endif; ?> value="Merkezi Sistem (Isı Pay Ölçer)">Merkezi Sistem (Isı Pay Ölçer)</option>
+                    <option <?php if(set_value('emlak_isitma') == 'Doğalgaz (Kombi)'): echo 'selected'; endif; ?> value="Doğalgaz (Kombi)">Doğalgaz (Kombi)</option>
+                    <option <?php if(set_value('emlak_isitma') == 'Yerden Isıtma'): echo 'selected'; endif; ?> value="Yerden Isıtma">Yerden Isıtma</option>
+                    <option <?php if(set_value('emlak_isitma') == 'Klima'): echo 'selected'; endif; ?> value="Klima">Klima</option>
+                    <option <?php if(set_value('emlak_isitma') == 'Güneş Enerjisi'): echo 'selected'; endif; ?> value="Güneş Enerjisi">Güneş Enerjisi</option>
+                    <option <?php if(set_value('emlak_isitma') == 'Jeotermal'): echo 'selected'; endif; ?> value="Jeotermal">Jeotermal</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="emlak_esyali">Eşyalı</label>
+                  <select id="emlak_esyali" name="emlak_esyali" class="form-control" data-parsley-trigger="change" data-required="true">
+                    <option value="0">Hayır</option>
+                    <option value="1" <?php if(set_value('emlak_esyali') == 1): echo 'selected'; endif; ?>>Evet</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="emlak_kullanim_durumu">Kullanım Durumu</label>
+                  <select id="emlak_kullanim_durumu" name="emlak_kullanim_durumu" class="form-control" data-parsley-trigger="change" data-required="true">
+                    <option value="0" <?php if(set_value('emlak_kullanim_durumu') == 0): echo 'selected'; endif; ?>>Boş</option>
+                    <option value="1" <?php if(set_value('emlak_kullanim_durumu') == 1): echo 'selected'; endif; ?>>Kiracılı</option>
+                    <option value="2" <?php if(set_value('emlak_kullanim_durumu') == 2): echo 'selected'; endif; ?>>Mülk Sahibi</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="emlak_site_icersinde">Site İçersinde</label>
+                  <select id="emlak_site_icersinde" name="emlak_site_icersinde" class="form-control" data-parsley-trigger="change" data-required="true">
+                    <option value="0">Hayır</option>
+                    <option value="1" <?php if(set_value('emlak_site_icersinde') == 1): echo 'selected'; endif; ?>>Evet</option>
+                  </select>
+                </div>
+              </div>
             </div>
 
 
+            <div id="map" style="min-height: 250px; width: 100%;"></div>
 
-            <div class="form-group">
-              <label for="emlak_harita_enlem">Enlem</label>
-              <input type="text" id="emlak_harita_enlem" name="emlak_harita_enlem"  value="{{set_value('emlak_harita_enlem')}}" class="form-control" data-parsley-trigger="change" data-required="true">
-            </div>
-
-            <div class="form-group">
-              <label for="emlak_harita_boylam">Boylam</label>
-              <input type="text" id="emlak_harita_boylam" name="emlak_harita_boylam"  value="{{set_value('emlak_harita_boylam')}}" class="form-control" data-parsley-trigger="change" data-required="true">
-            </div>
-
+            <input type="hidden" id="emlak_harita_enlem" name="emlak_harita_enlem"  value="{{set_value('emlak_harita_enlem')}}" class="form-control">
+            <input type="hidden" id="emlak_harita_boylam" name="emlak_harita_boylam"  value="{{set_value('emlak_harita_boylam')}}" class="form-control">
 
             <hr>
             <h3>Cephe Özellikleri</h3>
@@ -240,10 +442,10 @@ Yeni Emlak İlanı Oluştur | Emlak İlan Yönetimi | YönetimPaneli
               <label class="ozellik" for="ozellikler_ic_bulasik_makinesi"><input type="checkbox" id="ozellikler_ic_bulasik_makinesi" name="ozellikler_ic_bulasik_makinesi" value="1" <?php if(set_value('ozellikler_ic_bulasik_makinesi') == 1): echo 'checked'; endif; ?>> Bulaşık Makinesi</label>
               <label class="ozellik" for="ozellikler_ic_buzdolabi"><input type="checkbox" id="ozellikler_ic_buzdolabi" name="ozellikler_ic_buzdolabi" value="1" <?php if(set_value('ozellikler_ic_buzdolabi') == 1): echo 'checked'; endif; ?>> Buzdolabı</label>
               <label class="ozellik" for="ozellikler_ic_duvar_kagidi"><input type="checkbox" id="ozellikler_ic_duvar_kagidi" name="ozellikler_ic_duvar_kagidi" value="1" <?php if(set_value('ozellikler_ic_duvar_kagidi') == 1): echo 'checked'; endif; ?>> Duvar Kağıdı</label>
-              <label class="ozellik" for="ozellikler_ic_dusakabin"><input type="checkbox" id="ozellikler_ic_dusakabin" name="ozellikler_ic_dusakabin" value="1" <?php if(set_value('ozellikler_ic_dusakabin') == 1): echo 'checked'; endif; ?>> dusakabin</label>
+              <label class="ozellik" for="ozellikler_ic_dusakabin"><input type="checkbox" id="ozellikler_ic_dusakabin" name="ozellikler_ic_dusakabin" value="1" <?php if(set_value('ozellikler_ic_dusakabin') == 1): echo 'checked'; endif; ?>> Duşakabin</label>
               <label class="ozellik" for="ozellikler_ic_ebeveyn_banyosu"><input type="checkbox" id="ozellikler_ic_ebeveyn_banyosu" name="ozellikler_ic_ebeveyn_banyosu" value="1" <?php if(set_value('ozellikler_ic_ebeveyn_banyosu') == 1): echo 'checked'; endif; ?>> Evebeyn Banyosu</label>
               <label class="ozellik" for="ozellikler_ic_fiber_internet"><input type="checkbox" id="ozellikler_ic_fiber_internet" name="ozellikler_ic_fiber_internet" value="1" <?php if(set_value('ozellikler_ic_fiber_internet') == 1): echo 'checked'; endif; ?>> Fiber İnternet</label>
-              <label class="ozellik" for="ozellikler_ic_firin"><input type="checkbox" id="ozellikler_ic_firin" name="ozellikler_ic_firin" value="1" <?php if(set_value('ozellikler_ic_firin') == 1): echo 'checked'; endif; ?>> firin</label>
+              <label class="ozellik" for="ozellikler_ic_firin"><input type="checkbox" id="ozellikler_ic_firin" name="ozellikler_ic_firin" value="1" <?php if(set_value('ozellikler_ic_firin') == 1): echo 'checked'; endif; ?>> Fırın</label>
               <label class="ozellik" for="ozellikler_ic_giyinme_odasi"><input type="checkbox" id="ozellikler_ic_giyinme_odasi" name="ozellikler_ic_giyinme_odasi" value="1" <?php if(set_value('ozellikler_ic_giyinme_odasi') == 1): echo 'checked'; endif; ?>> Giyinme Odasi</label>
               <label class="ozellik" for="ozellikler_ic_gomme_dolap"><input type="checkbox" id="ozellikler_ic_gomme_dolap" name="ozellikler_ic_gomme_dolap" value="1" <?php if(set_value('ozellikler_ic_gomme_dolap') == 1): echo 'checked'; endif; ?>> Gömme Dolap</label>
               <label class="ozellik" for="ozellikler_ic_goruntulu_diyafon"><input type="checkbox" id="ozellikler_ic_goruntulu_diyafon" name="ozellikler_ic_goruntulu_diyafon" value="1" <?php if(set_value('ozellikler_ic_goruntulu_diyafon') == 1): echo 'checked'; endif; ?>> Goruntülü Diyafon</label>
@@ -319,7 +521,7 @@ Yeni Emlak İlanı Oluştur | Emlak İlan Yönetimi | YönetimPaneli
               <label class="ozellik" for="ozellikler_muhit_market"><input type="checkbox" id="ozellikler_muhit_market" name="ozellikler_muhit_market" value="1" <?php if(set_value('ozellikler_muhit_market') == 1): echo 'checked'; endif; ?>> Market</label>
               <label class="ozellik" for="ozellikler_muhit_park"><input type="checkbox" id="ozellikler_muhit_park" name="ozellikler_muhit_park" value="1" <?php if(set_value('ozellikler_muhit_park') == 1): echo 'checked'; endif; ?>> park</label>
               <label class="ozellik" for="ozellikler_muhit_polis_merkezi"><input type="checkbox" id="ozellikler_muhit_polis_merkezi" name="ozellikler_muhit_polis_merkezi" value="1" <?php if(set_value('ozellikler_muhit_polis_merkezi') == 1): echo 'checked'; endif; ?>> Polis Merkezi</label>
-              <label class="ozellik" for="ozellikler_muhit_saglik_ocagi"><input type="checkbox" id="ozellikler_muhit_saglik_ocagi" name="ozellikler_muhit_saglik_ocagi" value="1" <?php if(set_value('ozellikler_muhit_saglik_ocagi') == 1): echo 'checked'; endif; ?>> Saglik Ocagi</label>
+              <label class="ozellik" for="ozellikler_muhit_saglik_ocagi"><input type="checkbox" id="ozellikler_muhit_saglik_ocagi" name="ozellikler_muhit_saglik_ocagi" value="1" <?php if(set_value('ozellikler_muhit_saglik_ocagi') == 1): echo 'checked'; endif; ?>> Sağlık Ocağı</label>
               <label class="ozellik" for="ozellikler_muhit_semt_pazari"><input type="checkbox" id="ozellikler_muhit_semt_pazari" name="ozellikler_muhit_semt_pazari" value="1" <?php if(set_value('ozellikler_muhit_semt_pazari') == 1): echo 'checked'; endif; ?>> Semt Pazari</label>
               <label class="ozellik" for="ozellikler_muhit_spor_salonu"><input type="checkbox" id="ozellikler_muhit_spor_salonu" name="ozellikler_muhit_spor_salonu" value="1" <?php if(set_value('ozellikler_muhit_spor_salonu') == 1): echo 'checked'; endif; ?>> Spor Salonu</label>
               <label class="ozellik" for="ozellikler_muhit_universite"><input type="checkbox" id="ozellikler_muhit_universite" name="ozellikler_muhit_universite" value="1" <?php if(set_value('ozellikler_muhit_universite') == 1): echo 'checked'; endif; ?>> Üniversite</label>
@@ -384,4 +586,339 @@ Yeni Emlak İlanı Oluştur | Emlak İlan Yönetimi | YönetimPaneli
 
 @section('scripts')
   <script src="/public/backend/plugins/parsley/parsley.js"></script>
+  <script src="/public/backend/plugins/select2/select2.min.js"></script>
+  <script src="/public/backend/plugins/select2/select2_locale_tr.js"></script>
+  <script>
+  $('.select2').select2();
+  </script>
+
+
+
+  <script>
+    $(document).on('change', '#konum_sehir', function(){
+      $this = $(this);
+      sehirId = $this.val();
+
+      $.ajax({
+        url: '{{base_url("emlak/ilan/ajax_ilce")}}/'+sehirId,
+        dataType: 'json',
+        success: function(msg) {
+          val = '';
+          $.each(msg, function(index, value) {
+            val += '<option value="'+value.ilce_id+'">'+value.ad+'</option>';
+          });
+
+          $('#konum_ilce').html(val);
+          $('#konum_semt').html('<option>Lütfen İlçe Seçin</option>');
+          $('#konum_mahalle').html('<option>Lütfen Semt Seçin</option>');
+        }
+      });
+    });
+
+    $(document).on('change', '#konum_ilce', function(){
+      $this = $(this);
+      ilceId = $this.val();
+
+      $.ajax({
+        url: '{{base_url("emlak/ilan/ajax_semt")}}/'+ilceId,
+        dataType: 'json',
+        success: function(msg) {
+          val = '';
+          $.each(msg, function(index, value) {
+            val += '<option value="'+value.semt_id+'">'+value.ad+'</option>';
+          });
+          $('#konum_semt').html(val);
+        }
+      });
+    });
+
+    $(document).on('change', '#konum_semt', function(){
+      $this = $(this);
+      semtId = $this.val();
+
+      $.ajax({
+        url: '{{base_url("emlak/ilan/ajax_mahalle")}}/'+semtId,
+        dataType: 'json',
+        success: function(msg) {
+          val = '';
+          $.each(msg, function(index, value) {
+            val += '<option value="'+value.mahalle_id+'">'+value.ad+'</option>';
+          });
+          $('#konum_mahalle').html(val);
+        }
+      });
+    });
+
+  </script>
+
+
+
+  <script>
+    $(document).on('change', '#kategori', function(){
+      $this = $(this);
+      kategoriId = $this.val();
+      if(kategoriId == 1) {
+        $('#alt_kategori').html('\
+          <option value="20">Daire</option>\
+          <option value="21">Residence</option>\
+          <option value="22">Müstakil Ev</option>\
+          <option value="23">Villa</option>\
+          <option value="24">Çiftlik Evi</option>\
+          <option value="25">Köşk & Konak</option>\
+          <option value="26">Yalı</option>\
+          <option value="27">Yalı Dairesi</option>\
+          <option value="28">Yazlık</option>\
+          <option value="29">Prefabrik Ev</option>\
+          <option value="30">Kooperatif</option>\
+          ');
+      } else if(kategoriId == 2) {
+        $('#alt_kategori').html('\
+          <option value="31">Daire</option>\
+          <option value="32">Residence</option>\
+          <option value="33">Müstakil Ev</option>\
+          <option value="34">Villa</option>\
+          <option value="35">Çiftlik Evi</option>\
+          <option value="36">Köşk & Konak</option>\
+          <option value="37">Yalı</option>\
+          <option value="38">Yalı Dairesi</option>\
+          <option value="39">Yazlık</option>\
+          <option value="40">Prefabrik Ev</option>\
+          <option value="41">Kooperatif</option>\
+          ');
+      } else if(kategoriId == 3) {
+        $('#alt_kategori').html('\
+          <option value="42">Akaryakıt İstasyonu</option>\
+          <option value="43">Apartman Dairesi</option>\
+          <option value="44">Atölye</option>\
+          <option value="45">Büfe</option>\
+          <option value="46">Büro & Ofis</option>\
+          <option value="47">Cafe & Bar</option>\
+          <option value="48">Çiftlik</option>\
+          <option value="49">Depo</option>\
+          <option value="50">Dershane & Kurs</option>\
+          <option value="51">Düğün Salonu</option>\
+          <option value="52">Dükkan & Mağaza</option>\
+          <option value="53">Eczane & Medikal</option>\
+          <option value="54">Fabrika</option>\
+          <option value="55">Fotoğraf Stüdyosu</option>\
+          <option value="56">Hazır & Sanal Ofis</option>\
+          <option value="57">İmalathane</option>\
+          <option value="58">İş Hanı Katı & Ofisi</option>\
+          <option value="59">Komple Bina</option>\
+          <option value="60">Kuaför & Güzellik Merkezi</option>\
+          <option value="61">Maden Ocağı</option>\
+          <option value="62">Market</option>\
+          <option value="63">Muayenehane</option>\
+          <option value="64">Oto Kuaför & Yıkama</option>\
+          <option value="65">Otopark</option>\
+          <option value="66">Pasaj</option>\
+          <option value="67">Pastane & Fırın</option>\
+          <option value="68">Pazar Yeri</option>\
+          <option value="69">Plaza</option>\
+          <option value="70">Plaza Katı & Ofisi</option>\
+          <option value="71">Prova & Kayıt Stüdyosu</option>\
+          <option value="72">Restoran & Lokanta</option>\
+          <option value="73">Sağlık Merkezi</option>\
+          <option value="74">Sinema & Konferans Salonu</option>\
+          <option value="75">Spa, Hamam & Sauna</option>\
+          <option value="76">Spor Tesisi</option>\
+          <option value="77">Taksi Durağı</option>\
+          <option value="78">Tamirhane</option>\
+          <option value="79">Yurt</option>\
+          ');
+      } else if(kategoriId == 4) {
+        $('#alt_kategori').html('\
+          <option value="80">Akaryakıt İstasyonu</option>\
+          <option value="81">Apartman Dairesi</option>\
+          <option value="82">Atölye</option>\
+          <option value="83">Büfe</option>\
+          <option value="84">Büro & Ofis</option>\
+          <option value="85">Cafe & Bar</option>\
+          <option value="86">Çiftlik</option>\
+          <option value="87">Depo</option>\
+          <option value="88">Dershane & Kurs</option>\
+          <option value="89">Düğün Salonu</option>\
+          <option value="90">Dükkan & Mağaza</option>\
+          <option value="91">Eczane & Medikal</option>\
+          <option value="92">Fabrika</option>\
+          <option value="93">Fotoğraf Stüdyosu</option>\
+          <option value="94">Hazır & Sanal Ofis</option>\
+          <option value="95">İmalathane</option>\
+          <option value="96">İş Hanı Katı & Ofisi</option>\
+          <option value="97">Komple Bina</option>\
+          <option value="98">Kuaför & Güzellik Merkezi</option>\
+          <option value="99">Maden Ocağı</option>\
+          <option value="100">Market</option>\
+          <option value="101">Muayenehane</option>\
+          <option value="102">Oto Kuaför & Yıkama</option>\
+          <option value="103">Otopark</option>\
+          <option value="104">Pasaj</option>\
+          <option value="105">Pastane & Fırın</option>\
+          <option value="106">Pazar Yeri</option>\
+          <option value="107">Plaza</option>\
+          <option value="108">Plaza Katı & Ofisi</option>\
+          <option value="109">Prova & Kayıt Stüdyosu</option>\
+          <option value="110">Restoran & Lokanta</option>\
+          <option value="111">Sağlık Merkezi</option>\
+          <option value="112">Sinema & Konferans Salonu</option>\
+          <option value="113">Spa, Hamam & Sauna</option>\
+          <option value="114">Spor Tesisi</option>\
+          <option value="115">Taksi Durağı</option>\
+          <option value="116">Tamirhane</option>\
+          <option value="117">Yurt</option>\
+          ');
+      }
+      else if(kategoriId == 5) {
+        $('#alt_kategori').html('\
+          <option value="118">Akaryakıt İstasyonu</option>\
+          <option value="119">Apartman Dairesi</option>\
+          <option value="120">Atölye</option>\
+          <option value="121">Büfe</option>\
+          <option value="122">Büro & Ofis</option>\
+          <option value="123">Cafe & Bar</option>\
+          <option value="124">Çiftlik</option>\
+          <option value="125">Depo</option>\
+          <option value="125">Dershane & Kurs</option>\
+          <option value="127">Düğün Salonu</option>\
+          <option value="128">Dükkan & Mağaza</option>\
+          <option value="129">Eczane & Medikal</option>\
+          <option value="130">Fabrika</option>\
+          <option value="131">Fotoğraf Stüdyosu</option>\
+          <option value="132">Hazır & Sanal Ofis</option>\
+          <option value="133">İmalathane</option>\
+          <option value="134">İş Hanı Katı & Ofisi</option>\
+          <option value="135">Komple Bina</option>\
+          <option value="137">Kuaför & Güzellik Merkezi</option>\
+          <option value="138">Maden Ocağı</option>\
+          <option value="139">Market</option>\
+          <option value="140">Muayenehane</option>\
+          <option value="141">Oto Kuaför & Yıkama</option>\
+          <option value="142">Otopark</option>\
+          <option value="143">Pasaj</option>\
+          <option value="144">Pastane & Fırın</option>\
+          <option value="145">Pazar Yeri</option>\
+          <option value="146">Plaza</option>\
+          <option value="147">Plaza Katı & Ofisi</option>\
+          <option value="148">Prova & Kayıt Stüdyosu</option>\
+          <option value="149">Restoran & Lokanta</option>\
+          <option value="150">Sağlık Merkezi</option>\
+          <option value="151">Sinema & Konferans Salonu</option>\
+          <option value="152">Spa, Hamam & Sauna</option>\
+          <option value="153">Spor Tesisi</option>\
+          <option value="154">Taksi Durağı</option>\
+          <option value="155">Tamirhane</option>\
+          <option value="156">Yurt</option>\
+          ');
+      } else if(kategoriId == 6) {
+        $('#alt_kategori').html('<option>Kategori Seçimi Tamalanmıştır</option>');
+      }
+      else if(kategoriId == 7) {
+        $('#alt_kategori').html('<option>Kategori Seçimi Tamalanmıştır</option>');
+      } else if(kategoriId == 8) {
+        $('#alt_kategori').html('<option>Kategori Seçimi Tamalanmıştır</option>');
+      } else if(kategoriId == 9) {
+        $('#alt_kategori').html('<option>Kategori Seçimi Tamalanmıştır</option>');
+      } else if(kategoriId == 10) {
+        $('#alt_kategori').html('<option>Kategori Seçimi Tamalanmıştır</option>');
+      } else if(kategoriId == 11) {
+        $('#alt_kategori').html('<option>Kategori Seçimi Tamalanmıştır</option>');
+      } else if(kategoriId == 12) {
+        $('#alt_kategori').html('<option>Kategori Seçimi Tamalanmıştır</option>');
+      } else if(kategoriId == 13) {
+        $('#alt_kategori').html('<option>Kategori Seçimi Tamalanmıştır</option>');
+      } else if(kategoriId == 14) {
+        $('#alt_kategori').html('<option>Kategori Seçimi Tamalanmıştır</option>');
+      } else if(kategoriId == 15) {
+        $('#alt_kategori').html('<option>Kategori Seçimi Tamalanmıştır</option>');
+      } else if(kategoriId == 16) {
+        $('#alt_kategori').html('<option>Kategori Seçimi Tamalanmıştır</option>');
+      } else if(kategoriId == 17) {
+        $('#alt_kategori').html('<option>Kategori Seçimi Tamalanmıştır</option>');
+      } else if(kategoriId == 18) {
+        $('#alt_kategori').html('\
+          <option value="157">Otel</option>\
+          <option value="158">Apart Otel</option>\
+          <option value="159">Butik Otel</option>\
+          <option value="160">Motel</option>\
+          <option value="161">Pansiyon</option>\
+          <option value="162">Kamp Yeri (Mocamp)</option>\
+          <option value="163">Tatil Köyü</option>\
+          ');
+      } else {
+        $('#alt_kategori').html('\
+          <option value="157">Otel</option>\
+          <option value="158">Apart Otel</option>\
+          <option value="159">Butik Otel</option>\
+          <option value="160">Motel</option>\
+          <option value="161">Pansiyon</option>\
+          <option value="162">Kamp Yeri (Mocamp)</option>\
+          <option value="163">Tatil Köyü</option>\
+          ');
+      }
+
+    });
+  </script>
+
+  <script src="http://maps.google.com/maps/api/js?sensor=true."></script>
+  <script src="/public/backend/plugins/gmaps.js"></script>
+  <script type="text/javascript">
+    var map;
+    $(document).ready(function(){
+
+      map = new GMaps({
+        div: '#map',
+        lat: 36.852270,
+        lng:  30.760509
+      });
+
+
+     GMaps.on('click', map.map, function(event) {
+        map.removeMarkers();
+        var index = map.markers.length;
+        var lat = event.latLng.lat();
+        var lng = event.latLng.lng();
+        $('#emlak_harita_enlem').val(lat);
+        $('#emlak_harita_boylam').val(lng);
+
+
+
+        map.addMarker({
+          lat: lat,
+          lng: lng
+        });
+      });
+
+      GMaps.geolocate({
+        success: function(position){
+          map.setCenter(position.coords.latitude, position.coords.longitude);
+          $('#emlak_harita_enlem').val(position.coords.latitude);
+          $('#emlak_harita_boylam').val(position.coords.longitude);
+
+
+          map.addMarker({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+            title: '',
+            click: function(e) {
+              map.removeMarkers();
+            $('#emlak_harita_enlem').val('');
+            $('#emlak_harita_boylam').val('');
+
+            }
+          });
+
+        },
+        error: function(error){
+          alert('Geolocation failed: '+error.message);
+        },
+        not_supported: function(){
+          alert("Your browser does not support geolocation");
+        },
+        always: function(){
+         // alert("Done!");
+        }
+      });
+    });
+  </script>
+
 @endsection
